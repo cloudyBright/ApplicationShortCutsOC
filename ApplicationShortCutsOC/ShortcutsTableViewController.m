@@ -210,6 +210,8 @@
     }
     
     
+    
+    
     self.dynamicShortcuts[selected.row] = updateShortcutItem;
     
     [UIApplication sharedApplication].shortcutItems = _dynamicShortcuts;

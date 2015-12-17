@@ -63,7 +63,7 @@
     
 }
 
-- (UIApplicationShortcutIconType)iconTypeForSelectedRow:(int)row
+- (UIApplicationShortcutIconType)iconTypeForSelectedRow:(NSInteger)row
 {
     
     if (row > 6) {
@@ -123,14 +123,48 @@
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+
+    NSAssert(self.shortcutItem, @"The `selectedShortcutItem` was not set.");
+    
+    if ([segue.identifier isEqualToString:@"ShortcutDetailUpdated"]) {
+        
+        
+        UIApplicationShortcutIconType iconType= [self iconTypeForSelectedRow:[self.pickerView selectedRowInComponent:0]];
+        
+        UIApplicationShortcutIcon* icon = [UIApplicationShortcutIcon iconWithType:iconType];
+        
+        NSNumber *iconKeyValue = [NSNumber numberWithInteger:[self.pickerView selectedRowInComponent:0]];
+        self.shortcutItem = [[UIApplicationShortcutItem alloc] initWithType:self.shortcutItem.type localizedTitle:self.titleTextField.text localizedSubtitle:self.subtitleTextField.text icon:icon userInfo:@{[AppDelegate applicationShortcutUserInfoIconKey]:iconKeyValue}];
+
+        
+    }
+    
+    
 }
-*/
+
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
